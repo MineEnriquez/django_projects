@@ -1,0 +1,115 @@
+
+(djangoPy3Env)>dj openshell
+
+(djangoPy3Env)>goto openshell
+
+(djangoPy3Env)>ECHO OFF
+------------------------------------------
+from apps.REPLACEME.models import *
+from apps.howarts.models import *
+CREATE:    ClassName.objects.create(field1="value for field1", field2="value for field2", etc.)
+CREATE W/RELATIONSHIP: my_book = Book.objects.create(title="Little Women", author=Author.objects.get(id=2))
+DISPLAY:    ClassName.objects.all()
+UPDATE:    temp = ClassName.objects.get(id=1)
+           temp.field_name = "some new value for field_name"
+           temp.save()
+DISPLAY VALUES:    ClassName.objects.all().values() - shows all the values of a QuerySet"
+------------------------------------------
+------  python manage.py shell   ---------
+Python 3.7.4 (tags/v3.7.4:e09359112e, Jul  8 2019, 20:34:20) [MSC v.1916 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> lastNinja = Ninja.objects.last(dojo_id=Dojo.objects.last()).values()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'Ninja' is not defined
+>>> from apps.dojo_ninjas_app.models import *
+>>> lastNinja = Ninja.objects.last(dojo_id=Dojo.objects.last()).values()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "C:\Git\BOOTCAMP\CodingDojo\Bootcamp\python_stack\my_environment\djangoPy3Env\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+TypeError: last() got an unexpected keyword argument 'dojo_id'
+>>> for ninja in lastNinja : print(ninja)
+...
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'lastNinja' is not defined
+>>> from apps.dojo_ninjas_app.models import *
+>>> lastNinja = Ninja.objects.last(dojo_id=Dojo.objects.last()).values()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "C:\Git\BOOTCAMP\CodingDojo\Bootcamp\python_stack\my_environment\djangoPy3Env\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+TypeError: last() got an unexpected keyword argument 'dojo_id'
+>>> x = Ninja.objects.last(dojo_id=Dojo.objects.last()).values()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "C:\Git\BOOTCAMP\CodingDojo\Bootcamp\python_stack\my_environment\djangoPy3Env\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+TypeError: last() got an unexpected keyword argument 'dojo_id'
+>>> x = Dojo.objects.all()
+>>> x = Dojo.objects.all().values()
+>>> for i in x: print(i)
+...
+{'id': 4, 'name': 'Cloudy Dojo', 'city': 'Seattle', 'state': 'WA'}
+{'id': 5, 'name': 'Sunny Dojo', 'city': 'Pasadena', 'state': 'CA'}
+{'id': 6, 'name': 'Sparkly Dojo', 'city': 'Boston', 'state': 'MA'}
+>>> y = Ninjas.objects.all().values()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'Ninjas' is not defined
+>>> y = Ninja.objects.all().values()
+>>> for i in y: print(i)
+...
+{'id': 1, 'dojo_id_id': 4, 'first_name': 'Azul', 'last_name': 'Cuenca'}
+{'id': 2, 'dojo_id_id': 4, 'first_name': 'Lucesita', 'last_name': 'Godinez'}
+{'id': 3, 'dojo_id_id': 4, 'first_name': 'Pierre', 'last_name': 'LeBlanc'}
+{'id': 4, 'dojo_id_id': 5, 'first_name': 'Sebastian', 'last_name': 'Loyzaga'}
+{'id': 5, 'dojo_id_id': 5, 'first_name': 'Romina', 'last_name': 'Alvarez'}
+{'id': 6, 'dojo_id_id': 5, 'first_name': 'Peter', 'last_name': 'Castro'}
+{'id': 7, 'dojo_id_id': 6, 'first_name': 'Luylu', 'last_name': 'Lopez'}
+{'id': 8, 'dojo_id_id': 6, 'first_name': 'Anabell', 'last_name': 'White'}
+{'id': 9, 'dojo_id_id': 6, 'first_name': 'Chuy', 'last_name': 'White'}
+>>> thedojo = Dojo.objects.filter(id = Ninja.objects.get(id=9).dojo_id_id)
+>>> print(thedojo)
+<QuerySet [<Dojo: Dojo object>]>
+>>> print(thedojo.name)
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'QuerySet' object has no attribute 'name'
+>>> print(thedojo['name'])
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "C:\Git\BOOTCAMP\CodingDojo\Bootcamp\python_stack\my_environment\djangoPy3Env\lib\site-packages\django\db\models\query.py", line 271, in __getitem__
+    raise TypeError
+TypeError
+>>> print(thedojo.objects)
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'QuerySet' object has no attribute 'objects'
+>>> for i in thedojo: print(i)
+...
+Dojo object
+>>> print(thedojo.id)
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'QuerySet' object has no attribute 'id'
+>>> print(thedojo(id))
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+TypeError: 'QuerySet' object is not callable
+>>> thedojo = Dojo.objects.filter(id = Ninja.objects.get(id=9).dojo_id_id)
+>>> thedojo
+<QuerySet [<Dojo: Dojo object>]>
+>>> thedojo = Dojo.objects.get(id = Ninja.objects.get(id=9).dojo_id_id)
+>>> print(thedojo)
+Dojo object
+>>> print(thedojo.id)
+6
+>>> print(thedojo.name)
+Sparkly Dojo
+>>> thedojo = Dojo.objects.get(id = Ninja.objects.get(id=9).dojo_id_id).name
+>>> print(thedojo)
+Sparkly Dojo
+>>>

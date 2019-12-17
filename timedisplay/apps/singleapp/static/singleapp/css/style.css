@@ -1,0 +1,16 @@
+.wrapper {
+    width: 500px;
+    margin: 50px auto;
+}
+.boxed{
+    border: 1px solid black;
+}
+.centered{
+      text-align: center;  
+}
+
+.title{
+    width: 300px;
+    margin: 20px auto;
+    padding: 15px;
+}

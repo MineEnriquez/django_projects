@@ -1,0 +1,33 @@
+body {
+    background:grey;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.wrapper {
+    width: 1050px;
+    margin: 50px auto;
+    padding: 20px;
+    background: whitesmoke;
+}
+
+.box {
+    width: 210px;
+    height: 210px;
+    margin: 10px;
+    padding: 10px;
+    text-align: center;
+}
+
+input {
+    margin: 10px auto;
+}
+
+.sidebyside {
+    display: inline-block;
+}
+
+.activities {
+    min-width: 90%;
+    height: 200px;
+    overflow: scroll;
+}

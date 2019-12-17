@@ -1,0 +1,51 @@
+.wrapper {
+    width: 900px;
+    margin: 50px auto;
+    padding: 20px;
+    background: whitesmoke;
+    border: 5px solid lightgrey;
+    opacity:0.8;
+}
+
+.tablegrid {
+    width: 350px;
+    height: 400px;
+    margin: 5px;
+    padding: 5px;
+    overflow: scroll;
+}
+
+.dropdown {
+    margin: 10px 10px;
+    height: 40px;
+}
+
+.sidebyside {
+    display: inline-block;
+}
+.top {
+    vertical-align: top;    
+}
+.centered {
+    width: 400px;
+    margin: 10px auto;
+    padding: 10px;
+}
+
+.right{
+    float: right;
+    margin-right: 20px;
+}
+.recordinfo, .bookinfo {
+    width: 600px;
+    margin: 50px auto;
+    padding: 10px;  
+    text-align: left;
+    vertical-align: top;
+}
+
+.activities {
+    min-width: 90%;
+    height: 200px;
+    overflow: scroll;
+}

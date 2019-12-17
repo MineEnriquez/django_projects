@@ -1,0 +1,90 @@
+(djangoPy3Env)>call python manage.py makemigrations
+Migrations for 'dojo_ninjas_app':
+  apps\dojo_ninjas_app\migrations\0001_initial.py:
+    - Create model Dojo
+    - Create model Ninja
+
+(djangoPy3Env)>call python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, dojo_ninjas_app, sessions
+Running migrations:
+  Rendering model states... DONE
+  Applying contenttypes.0001_initial... OK
+  Applying auth.0001_initial... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying dojo_ninjas_app.0001_initial... OK
+  Applying sessions.0001_initial... OK
+
+(djangoPy3Env)>python manage.py shell
+Python 3.7.4 (tags/v3.7.4:e09359112e, Jul  8 2019, 20:34:20) [MSC v.1916 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+from apps.dojo_ninjas_app.models import *
+Dojo.objects.create(name="Super Dojo", city="Seattle", state="WA")
+Dojo.objects.create(name="Hot Dojo", city="Pasadena", state="CA")
+Dojo.objects.create(name="Cold Dojo", city="Boston", state="MA")
+
+temp = Dojo.objects.get(id=1)
+temp.delete()
+temp = Dojo.objects.get(id=2)
+temp.delete()
+temp = Dojo.objects.get(id=3)
+temp.delete()
+Dojo.objects.create(name="Cloudy Dojo", city="Seattle", state="WA")
+Dojo.objects.create(name="Sunny Dojo", city="Pasadena", state="CA")
+Dojo.objects.create(name="Sparkly Dojo", city="Boston", state="MA")
+
+Ninja.objects.create(first_name="Azul", last_name="Cuenca", dojo_id=Dojo.objects.get(id=4))
+Ninja.objects.create(first_name="Lucesita", last_name="Godinez", dojo_id=Dojo.objects.get(id=4))
+Ninja.objects.create(first_name="Pierre", last_name="LeBlanc", dojo_id=Dojo.objects.get(id=4))
+
+Ninja.objects.create(first_name="Sebastian", last_name="Loyzaga", dojo_id=Dojo.objects.get(id=5))
+Ninja.objects.create(first_name="Romina", last_name="Alvarez", dojo_id=Dojo.objects.get(id=5))
+Ninja.objects.create(first_name="Peter", last_name="Castro", dojo_id=Dojo.objects.get(id=5))
+
+Ninja.objects.create(first_name="Luylu", last_name="Lopez", dojo_id=Dojo.objects.get(id=6))
+Ninja.objects.create(first_name="Anabell", last_name="White", dojo_id=Dojo.objects.get(id=6))
+Ninja.objects.create(first_name="Chuy", last_name="White", dojo_id=Dojo.objects.get(id=6))
+
+listOfNinjas01 = Ninja.objects.filter(dojo_id=Dojo.objects.first()).values()
+for ninja in listOfNinjas01: print(ninja)
+
+listOfNinjas02 = Ninja.objects.filter(dojo_id=Dojo.objects.last()).values()
+for ninja in listOfNinjas02: print(ninja)
+
+lastNinja = Ninja.objects.last(dojo_id=Dojo.objects.last()).values()
+for ninja in lastNinja : print(ninja)
+
+thedojo = Dojo.objects.get(id = Ninja.objects.get(id=9).dojo_id_id).name
+
+  > python manage.py makemigrations
+  > python manage.py migrate
+
+Selected 1
+entered an empty string (sorry, I didn't entered "old dojo")
+
+from apps.dojo_ninjas_app.models import *
+
+Dojo.objects.create(name="Super lazy dojo", city="Miami", state="FL", desc="All day party dojo")
+
+>>> Dojo.objects.all().values()
+<QuerySet [{'id': 4, 'name': 'Cloudy Dojo', 'city': 'Seattle', 'state': 'WA', 'desc': ' '}, {'id': 5, 'name': 'Sunny Dojo', 'city': 'Pasadena', 'state': 'CA', 'desc': ' '}, {'id': 6, 'name': 'Sparkly Dojo', 'city': 'Boston', 'state': 'MA', 'desc': ' '}, {'id': 7, 'name': 'Super lazy dojo', 'city': 'Miami', 'state': 'FL', 'desc': 'All day party dojo'}]>
+
+# ===== Query: Remove the first author of the 3rd book===============
+>>> third_book = books.objects.get(id=3)
+>>> author = authors.objects.filter(books = third_book)
+>>> firstauthor = author[0]
+>>> print(firstauthor.first_name)
+Emily
+>>> firstauthor.books.remove(third_book)
+>>>
+

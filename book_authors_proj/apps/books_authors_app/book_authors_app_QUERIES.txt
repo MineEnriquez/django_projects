@@ -1,0 +1,71 @@
+from apps.books_authors_app.models import *
+books.objects.create(title="C Sharp")
+books.objects.create(title="Jave")
+books.objects.create(title="Python")
+books.objects.create(title="PHP")
+books.objects.create(title="Ruby")
+authors.objects.create(first_name="Jane", last_name="Austen")
+authors.objects.create(first_name="Emily", last_name="Dickinson")
+authors.objects.create(first_name="Fyodor", last_name="Dostoevksy")
+authors.objects.create(first_name="William", last_name="Shakespeare")
+authors.objects.create(first_name="Lau", last_name="Tzu")
+python manage.py makemigrations
+python manage.py migrate
+
+>>> temp.title = "C#"
+>>> temp.save()
+>>> temp = authors.objects.get(id=4)
+>>> temp.first_name = "Bill"
+>>> temp.save()
+>>> author_1 = authors.objects.get(id=1)
+>>> book_1 = books.objects.get(id=1)
+>>> book_2 = books.objects.get(id=2)
+>>> book_1.books.add(author_1)
+>>> book_2.books.add(author_1)
+>>> author_2 = authors.objects.get(id=2)
+>>> book_3 = books.objects.get(id=3)
+>>> book_1.books.add(author_2)
+>>> book_2.books.add(author_2)
+>>> book_3.books.add(author_2)
+>>> author_3 = authors.objects.get(id=3)
+>>> book_4 = books.objects.get(id=4)
+>>> book_1.books.add(author_3)
+>>> book_2.books.add(author_3)
+>>> book_3.books.add(author_3)
+>>> book_4.books.add(author_3)
+book_1.books.add(author_4)
+book_2.books.add(author_4)
+book_3.books.add(author_4)
+book_4.books.add(author_4)
+book_5.books.add(author_4)
+>>> this_book = books.objects.get(id=3)
+>>> auth = authors.objects.filter(books=this_book)
+>>> for i in auth.values(): print(i)
+...
+{'id': 2, 'first_name': 'Emily', 'last_name': 'Dickinson', 'created_at': datetime.datetime(2019, 9, 16, 6, 57, 49, 43733, tzinfo=<UTC>), 'updated_at': datetime.datetime(2019, 9, 16, 6, 57, 49, 43733, tzinfo=<UTC>), 'notes': ''}
+{'id': 3, 'first_name': 'Fyodor', 'last_name': 'Dostoevksy', 'created_at': datetime.datetime(2019, 9, 16, 6, 57, 49, 69733, tzinfo=<UTC>), 'updated_at': datetime.datetime(2019, 9, 16, 6, 57, 49, 69733, tzinfo=<UTC>), 'notes': ''}
+{'id': 4, 'first_name': 'Bill', 'last_name': 'Shakespeare', 'created_at': datetime.datetime(2019, 9, 16, 7, 7, 9, 797930, tzinfo=<UTC>), 'updated_at': datetime.datetime(2019, 9, 16, 7, 7, 9, 797930, tzinfo=<UTC>), 'notes': ''}
+>>>
+
+# ===== Query: Remove the first author of the 3rd book===============
+>>> third_book = books.objects.get(id=3)
+>>> author = authors.objects.filter(books = third_book)
+>>> firstauthor = author[0]
+>>> firstauthor.books.remove(third_book)
+#======Query: Add the 5th author as one of the authors of the 2nd book
+>>> fifth_author = authors.objects.get(id=5)
+>>> second_book = books.objects.get(id=2)
+>>> fifth_author.books.add(second_book)
+
+#------------------Find all the books that the 3rd author is part of-----------------
+>>> third_author = authors.objects.get(id=3)
+>>> his_books = third_author.books.all()
+OR:
+>>> his_books = third_author.books.all().values()
+
+#----------------Query: Find all the authors that contributed to the 5th book------------------
+>>> fifth_book = books.objects.get(id=5)
+>>> theauthors = authors.objects.filter(books = fifth_book)
+>>> for x in theauthors: print(x.first_name, x.last_name)
+...
+Bill Shakespeare

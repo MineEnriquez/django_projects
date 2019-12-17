@@ -1,0 +1,21 @@
+body{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.wrapper {
+    width: 500px;
+    margin: 50px auto;
+}
+.boxed{
+    border: 1px solid black;
+    height: 80px;
+    margin: 30px auto;
+}
+.centered{
+      text-align: center;  
+}
+
+.title{
+    width: 300px;
+    margin: 20px auto;
+    padding: 15px;
+}

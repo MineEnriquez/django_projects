@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'books_authors_app/css/style.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Authors</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="recordinfo">
+            <h1> {{author_info.first_name}} {{author_info.last_name}}</h1>
+            <h4>ID: {{author_info.id}}</h4>
+            <div>
+                <table>
+                    <tr>
+                        <td>
+                            <h4>Notes: </h4>
+                        </td>
+                        <td>{{author_info.notes}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="recordinfo">
+            <h4>Books:</h4>
+            <ul>
+                {% for book in books_info %}
+                <li> {{book.title}}</li>
+                {% endfor %}
+            </ul>
+            <form action="/addbooktoauthor" method="POST">
+                    {%csrf_token%}
+                <select class="dropdown" name="book_id">
+                    {% for book in all_books %}
+                    <option value="{{book.id}}">{{book.title}}</option>
+                    {% endfor %}
+                </select>
+                <input type="hidden" name="author_id" value={{author_info.id}}>
+                <input class="btn btn-primary" type="submit" value="Add">
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

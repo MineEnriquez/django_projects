@@ -1,0 +1,37 @@
+
+>>> from apps.howarts.models import *
+>>> cls
+>>> from apps.howarts.models import *
+>>> users2.objects.create(last_name="Gomez", first_name="Maria", email_address="something@gmail.com", age=25)
+<users2: users2 object>
+>>> users2.objects.create(last_name="Yiang", first_name="Lee", email_address="omething@gmail.com", age=22)
+<users2: users2 object>
+>>> users2.objects.create(last_name="Toto", first_name="Yin", email_address="inspector@gmail.com", age=62)
+<users2: users2 object>
+>>> users2.objects.all()
+<QuerySet [<users2: users2 object>, <users2: users2 object>, <users2: users2 object>, <users2: users2 object>, <users2: users2 object>, <users2: users2 object>]>
+>>> users2.objects.all().values()
+<QuerySet [{'id': 1, 'first_name': 'Stepanie', 'last_name': 'Enriq', 'email_address': 'step@emial.com', 'age': 14, 'created_at': datetime.date(2019, 1, 1), 'updated_at': datetime.date(2019, 1, 1)}, {'id': 2, 'first_name': 'Daniel', 'last_name': 'Enriq', 'email_address': 'danyboy@emial.com', 'age': 14, 'created_at': datetime.date(2019, 1, 1), 'updated_at': datetime.date(2019, 1, 1)}, {'id': 3, 'first_name': 'Mathew', 'last_name': 'McConey', 'email_address': 'mathew@email.com', 'age': 50, 'created_at': datetime.date(2019, 1, 1), 'updated_at': datetime.date(2019, 1, 1)}, {'id': 4, 'first_name': 'Maria', 'last_name': 'Gomez', 'email_address': 'something@gmail.com', 'age': 25, 'created_at': datetime.date(2019, 1, 1), 'updated_at': datetime.date(2019, 1, 1)}, {'id': 5, 'first_name': 'Lee', 'last_name': 'Yiang', 'email_address': 'omething@gmail.com', 'age': 22, 'created_at': datetime.date(2019, 1, 1), 'updated_at': datetime.date(2019, 1, 1)}, {'id': 6, 'first_name': 'Yin', 'last_name': 'Toto', 'email_address': 'inspector@gmail.com', 'age': 62, 'created_at': datetime.date(2019, 1, 1), 'updated_at': datetime.date(2019, 1, 1)}]>
+>>> users2.objects.last()
+<users2: users2 object>
+>>> users2.objects.first()
+<users2: users2 object>
+>>> temp = users2.objects.get(id=3)
+>>> temp.last_name = "Pancakes"
+>>> temp2 = users2.objects.get(id=2)
+>>> temp2.delete()
+(1, {'howarts.users2': 1})
+>>> users2.objects.all().order_by("first_name")
+<QuerySet [<users2: users2 object>, <users2: users2 object>, <users2: users2 object>, <users2: users2 object>, <users2: users2 object>]>
+>>> users2.objects.all().order_by("-first_name")
+<QuerySet [<users2: users2 object>, <users2: users2 object>, <users2: users2 object>, <users2: users2 object>, <users2: users2 object>]>
+>>> list = users2.objects.all().order_by("-first_name")
+>>> list = users2.objects.all().values().order_by("-first_name")
+>>> for x in list: print(x)
+...
+{'id': 6, 'first_name': 'Yin', 'last_name': 'Toto', 'email_address': 'inspector@gmail.com', 'age': 62, 'created_at': datetime.date(2019, 1, 1), 'updated_at': datetime.date(2019, 1, 1)}
+{'id': 1, 'first_name': 'Stepanie', 'last_name': 'Enriq', 'email_address': 'step@emial.com', 'age': 14, 'created_at': datetime.date(2019, 1, 1), 'updated_at': datetime.date(2019, 1, 1)}
+{'id': 3, 'first_name': 'Mathew', 'last_name': 'McConey', 'email_address': 'mathew@email.com', 'age': 50, 'created_at': datetime.date(2019, 1, 1), 'updated_at': datetime.date(2019, 1, 1)}
+{'id': 4, 'first_name': 'Maria', 'last_name': 'Gomez', 'email_address': 'something@gmail.com', 'age': 25, 'created_at': datetime.date(2019, 1, 1), 'updated_at': datetime.date(2019, 1, 1)}
+{'id': 5, 'first_name': 'Lee', 'last_name': 'Yiang', 'email_address': 'omething@gmail.com', 'age': 22, 'created_at': datetime.date(2019, 1, 1), 'updated_at': datetime.date(2019, 1, 1)}
+>>>

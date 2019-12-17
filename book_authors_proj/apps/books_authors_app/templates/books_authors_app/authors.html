@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'books_authors_app/css/style.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Document</title>
+    <style>
+        .mybody {
+            background-image: url("{% static 'books_authors_app/img/picture2.png' %}");
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+    </style>
+</head>
+
+<body class="mybody">
+    <div class="wrapper">
+        <div class="sidebyside centered top">
+            <h2> Add a Author:</h2>
+            <form action="/createauthor" method="POST">
+                {%csrf_token%}
+                <table class="table table-borderless top">
+                    <tr>
+                        <td>First Name</td>
+                        <td>
+                            <input type="text" name="first_name">
+                        </td>
+                    </tr>
+                    <tr>
+                            <td>Last Name</td>
+                            <td>
+                                <input type="text" name="last_name">
+                            </td>
+                        </tr>
+    
+                    <tr>
+                        <td>Notes</td>
+                        <td> 
+                            <textarea name="notes" id="notes" cols="30" rows="7"></textarea>
+                        </td>
+                    </tr>
+                </table>
+                    <input class="right" type="submit" value="Add">
+            </form>
+        </div>
+        <div class="sidebyside">
+            <table class="table table-striped box centered">
+                <thead class="thead-dark">
+                    <th>id</th>
+                    <th>Name</th>
+                    <th>Action</th>
+                </thead>
+                <tbody>
+                    {% for author in all_authors %}
+                    <tr>
+                        <td>
+                            {{author.id}}
+                        </td>
+                        <td>
+                            {{author.first_name}}{{author.last_name}}
+                        </td>
+                        <td>
+                            <a href="/authors/{{author.id}}">
+                                View
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
